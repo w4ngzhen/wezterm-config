@@ -32,7 +32,7 @@ local keys = {
   { key = 'Tab', mods = 'CTRL',       action = wezterm.action.ActivateTabRelative(1) },
 }
 -- font config
-local font = wezterm.font('JetBrainsMono Nerd Font', {});
+local font = wezterm.font('JetBrainsMono NF', {});
 --
 -- all config
 return {
