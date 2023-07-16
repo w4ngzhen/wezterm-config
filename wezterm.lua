@@ -25,11 +25,18 @@ elseif wezterm.target_triple == 'aarch64-apple-darwin' then
     args = { 'zsh', '-l' }
   })
 end
+local act = wezterm.action;
 -- keyboard mappings
 local keys = {
-  { key = 'w',   mods = 'ALT',        action = wezterm.action.ShowLauncher },
-  { key = 'n',   mods = 'SHIFT|CTRL', action = wezterm.action.ToggleFullScreen },
-  { key = 'Tab', mods = 'CTRL',       action = wezterm.action.ActivateTabRelative(1) },
+  { key = 'w',          mods = 'ALT',        action = act.ShowLauncher },
+  { key = 'n',          mods = 'SHIFT|CTRL', action = act.ToggleFullScreen },
+  { key = 'Tab',        mods = 'CTRL',       action = act.ActivateTabRelative(1) },
+  { key = 'LeftArrow',  mods = '',           action = act.ActivatePaneDirection 'Left' },
+  { key = 'RightArrow', mods = '',           action = act.ActivatePaneDirection 'Right' },
+  { key = 'UpArrow',    mods = '',           action = act.ActivatePaneDirection 'Up' },
+  { key = 'DownArrow',  mods = '',           action = act.ActivatePaneDirection 'Down' },
+  { key = 'RightArrow', mods = 'SHIFT',      action = act.SplitHorizontal { domain = 'CurrentPaneDomain'} },
+  { key = 'DownArrow',  mods = 'SHIFT',      action = act.SplitVertical { domain = 'CurrentPaneDomain'}},
 }
 -- font config
 local font = wezterm.font('JetBrainsMono NF', {});
