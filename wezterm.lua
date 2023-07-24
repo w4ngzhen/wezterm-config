@@ -42,8 +42,7 @@ local keys = {
 }
 -- font config
 local font = wezterm.font_with_fallback {
-  'JetBrainsMono NF',
-  'JetBrainsMono Nerd Font'
+  'Hack Nerd Font'
 };
 --
 -- all config
