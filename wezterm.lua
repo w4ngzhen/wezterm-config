@@ -48,7 +48,7 @@ local font = wezterm.font_with_fallback {
 -- all config
 return {
   font = font,
-  font_size = 16,
+  font_size = 14,
   line_height = 1.2,
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
   color_scheme = "JetBrains Darcula",
