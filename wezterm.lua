@@ -1,33 +1,16 @@
 local wezterm = require 'wezterm'
+
+local config = {}
+
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 500 }
+
 -- 启动menu
-local launch_menu = {}
--- Using shell
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  -- Windows
-  table.insert(launch_menu, {
-    label = 'PowerShell-NewWindow',
-    args = { "pwsh.exe" }
-  })
-  table.insert(launch_menu, {
-    label = 'CMD-NewWindow',
-    args = { 'cmd.exe' }
-  })
-elseif wezterm.target_triple == 'x86_64-apple-darwin' then
-  -- macOS (Intel)
-  table.insert(launch_menu, {
-    label = 'zsn-NewWindow',
-    args = { 'zsh', '-l' }
-  })
-elseif wezterm.target_triple == 'aarch64-apple-darwin' then
-  -- macOS (Apple Silicon)
-  table.insert(launch_menu, {
-    label = 'zsn-NewWindow',
-    args = { 'zsh', '-l' }
-  })
-end
 local act = wezterm.action;
+
 -- keyboard mappings
-local keys = {
+-- 禁用所有默认的按键配置，仅使用下面的按键配置
+config.disable_default_key_bindings = true;
+config.keys = {
   { key = 'w',          mods = 'ALT',        action = act.ShowLauncher },
   { key = 'n',          mods = 'SHIFT|CTRL', action = act.ToggleFullScreen },
   { key = 'Tab',        mods = 'CTRL',       action = act.ActivateTabRelative(1) },
@@ -40,22 +23,44 @@ local keys = {
   { key = 'DownArrow',  mods = 'SHIFT',      action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = 'p',          mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
 }
+config.launch_menu = {}
+-- Using shell
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  -- Windows
+  table.insert(config.launch_menu, {
+    label = 'PowerShell-NewWindow',
+    args = { "pwsh.exe" }
+  })
+  table.insert(config.launch_menu, {
+    label = 'CMD-NewWindow',
+    args = { 'cmd.exe' }
+  })
+elseif wezterm.target_triple == 'x86_64-apple-darwin' then
+  -- macOS (Intel)
+  table.insert(config.launch_menu, {
+    label = 'zsn-NewWindow',
+    args = { 'zsh', '-l' }
+  })
+  table.insert(config.keys, { key = "c", mods = "CMD", action = act.CopyTo 'Clipboard' })
+  table.insert(config.keys, { key = "v", mods = "CMD", action = act.PasteFrom 'Clipboard' })
+elseif wezterm.target_triple == 'aarch64-apple-darwin' then
+  -- macOS (Apple Silicon)
+  table.insert(config.launch_menu, {
+    label = 'zsn-NewWindow',
+    args = { 'zsh', '-l' }
+  })
+  table.insert(config.keys, { key = "c", mods = "CMD", action = act.CopyTo 'Clipboard' })
+  table.insert(config.keys, { key = "v", mods = "CMD", action = act.PasteFrom 'Clipboard' })
+end
 -- font config
-local font = wezterm.font_with_fallback {
+config.font = wezterm.font_with_fallback {
   'JetBrainsMono Nerd Font'
 };
+config.font_size = 14;
+config.line_height = 1.2;
+--
+-- theme
+config.color_scheme = "JetBrains Darcula"
 --
 -- all config
-return {
-  font = font,
-  font_size = 14,
-  line_height = 1.2,
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-  color_scheme = "JetBrains Darcula",
-  -- color_scheme = "Sakura",
-  keys = keys,
-  -- 禁用所有默认按键，仅使用上面自定义按键
-  disable_default_key_bindings = true,
-  -- 启动菜单
-  launch_menu = launch_menu
-}
+return config;
