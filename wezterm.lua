@@ -56,7 +56,7 @@ end
 config.font = wezterm.font_with_fallback {
   'JetBrainsMono Nerd Font'
 };
-config.font_size = 14;
+config.font_size = 18;
 config.line_height = 1.2;
 --
 -- theme
