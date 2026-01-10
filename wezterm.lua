@@ -52,6 +52,8 @@ elseif wezterm.target_triple == 'aarch64-apple-darwin' then
   table.insert(config.keys, { key = "c", mods = "CMD", action = act.CopyTo 'Clipboard' })
   table.insert(config.keys, { key = "v", mods = "CMD", action = act.PasteFrom 'Clipboard' })
 end
+-- disable Font Shaping
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 -- font config
 config.font = wezterm.font_with_fallback {
   'JetBrainsMono Nerd Font'
