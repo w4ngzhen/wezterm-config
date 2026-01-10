@@ -12,16 +12,18 @@ local act = wezterm.action;
 config.disable_default_key_bindings = true;
 config.keys = {
   { key = 'w',          mods = 'ALT',        action = act.ShowLauncher },
-  { key = 'n',          mods = 'SHIFT|CTRL', action = act.ToggleFullScreen },
-  { key = 'Tab',        mods = 'CTRL',       action = act.ActivateTabRelative(1) },
-  { key = 'Tab',        mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
-  { key = 'LeftArrow',  mods = 'ALT',        action = act.ActivatePaneDirection 'Left' },
-  { key = 'RightArrow', mods = 'ALT',        action = act.ActivatePaneDirection 'Right' },
-  { key = 'UpArrow',    mods = 'ALT',        action = act.ActivatePaneDirection 'Up' },
-  { key = 'DownArrow',  mods = 'ALT',        action = act.ActivatePaneDirection 'Down' },
+  --
+  { key = 'LeftArrow',  mods = 'CTRL',        action = act.ActivatePaneDirection 'Left' },
+  { key = 'RightArrow', mods = 'CTRL',        action = act.ActivatePaneDirection 'Right' },
+  { key = 'UpArrow',    mods = 'CTRL',        action = act.ActivatePaneDirection 'Up' },
+  { key = 'DownArrow',  mods = 'CTRL',        action = act.ActivatePaneDirection 'Down' },
+  --
   { key = 'RightArrow', mods = 'SHIFT',      action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = 'DownArrow',  mods = 'SHIFT',      action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
   { key = 'p',          mods = 'CTRL|SHIFT', action = act.ActivateCommandPalette },
+  -- macOS only
+  { key = 'w',          mods = 'CMD', action = wezterm.action.CloseCurrentTab { confirm = true }, },
+  { key = 'n',          mods = 'CMD', action = wezterm.action.SpawnCommandInNewTab { }, },
 }
 config.launch_menu = {}
 -- Using shell
