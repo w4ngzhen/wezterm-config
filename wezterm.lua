@@ -16,7 +16,7 @@ if use_default_prog then
         -- todo
     elseif is_mac_os then
         -- https://github.com/zellij-org/zellij-org.github.io/issues/284
-        config.default_prog = { "zsh", "-l", "-c", "zellij -l welcome" }
+        -- config.default_prog = { "zsh", "-l", "-c", "zellij -l welcome" }
     end
 end
 
